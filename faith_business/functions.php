@@ -39,7 +39,7 @@ function faith_business_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'faith_business_scripts' );
 
-// Register Custom Post Type
+// Register Slider Post Type
 function slider_post() {
 
 	$labels = array(
@@ -96,3 +96,61 @@ function slider_post() {
 
 }
 add_action( 'init', 'slider_post', 0 );
+
+
+
+// Register Service Post Type
+function faith_services() {
+
+	$labels = array(
+		'name'                  => _x( 'Services', 'Post Type General Name', 'faith_services' ),
+		'singular_name'         => _x( 'Service', 'Post Type Singular Name', 'faith_services' ),
+		'menu_name'             => __( 'Services', 'faith_services' ),
+		'name_admin_bar'        => __( 'Service', 'faith_services' ),
+		'archives'              => __( 'Item Archives', 'faith_services' ),
+		'attributes'            => __( 'Item Attributes', 'faith_services' ),
+		'parent_item_colon'     => __( 'Parent Item:', 'faith_services' ),
+		'all_items'             => __( 'All Items', 'faith_services' ),
+		'add_new_item'          => __( 'Add New Item', 'faith_services' ),
+		'add_new'               => __( 'Add New', 'faith_services' ),
+		'new_item'              => __( 'New Item', 'faith_services' ),
+		'edit_item'             => __( 'Edit Item', 'faith_services' ),
+		'update_item'           => __( 'Update Item', 'faith_services' ),
+		'view_item'             => __( 'View Item', 'faith_services' ),
+		'view_items'            => __( 'View Items', 'faith_services' ),
+		'search_items'          => __( 'Search Item', 'faith_services' ),
+		'not_found'             => __( 'Not found', 'faith_services' ),
+		'not_found_in_trash'    => __( 'Not found in Trash', 'faith_services' ),
+		'featured_image'        => __( 'Featured Image', 'faith_services' ),
+		'set_featured_image'    => __( 'Set featured image', 'faith_services' ),
+		'remove_featured_image' => __( 'Remove featured image', 'faith_services' ),
+		'use_featured_image'    => __( 'Use as featured image', 'faith_services' ),
+		'insert_into_item'      => __( 'Insert into item', 'faith_services' ),
+		'uploaded_to_this_item' => __( 'Uploaded to this item', 'faith_services' ),
+		'items_list'            => __( 'Items list', 'faith_services' ),
+		'items_list_navigation' => __( 'Items list navigation', 'faith_services' ),
+		'filter_items_list'     => __( 'Filter items list', 'faith_services' ),
+	);
+	$args = array(
+		'label'                 => __( 'Service', 'faith_services' ),
+		'description'           => __( 'Service Description', 'faith_services' ),
+		'labels'                => $labels,
+		'supports'              => array( 'title', 'editor' ),
+		'taxonomies'            => array( 'category', 'post_tag' ),
+		'hierarchical'          => false,
+		'public'                => true,
+		'show_ui'               => true,
+		'show_in_menu'          => true,
+		'menu_position'         => 5,
+		'show_in_admin_bar'     => true,
+		'show_in_nav_menus'     => true,
+		'can_export'            => true,
+		'has_archive'           => true,
+		'exclude_from_search'   => false,
+		'publicly_queryable'    => true,
+		'capability_type'       => 'page',
+	);
+	register_post_type( 'faith_services', $args );
+
+}
+add_action( 'init', 'faith_services', 0 );

@@ -10,50 +10,42 @@ get_header();
 
     <!-- Slider Area Start Here -->
     <section class="slider-area">
+
         <div class="sliders owl-carousel">
-            <div class="single-slide bg" style="background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/sliders/slide-1.jpg');">
+            <?php
+            $slider = new WP_Query(array(
+                'post_type' => 'faith_slider',
+            ));
+            
+            ?>
+            <?php while($slider->have_posts()):$slider->the_post();
+            // $slider_heading = get_post_meta( get_the_ID(), 'sub_heading', true);
+            // $slider_btn_text = get_post_meta( get_the_ID(), 'slider_btn_text', true);
+            // $slider_btn_link = get_post_meta( get_the_ID(), 'slider_btn_link', true);
+            ?>
+            <div class="single-slide bg" style="background-image: url('<?php echo the_post_thumbnail_url( ); ?>');">
                 <div class="container">
                     <div class="row">
                         <div class="col-xxl-12">
                             <div class="slide-content">
-                                <h4>we are halim</h4>
-                                <h1>digital agency</h1>
-                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas facere nostrum vel. Dolor accusantium animi laudantium placeat omnis eius consequuntur.</p>
-                                <a href="about.html" class="box-btn">contact us</a>
+                                <?php if(get_field('slider_sub_heading')): ?>
+                                <h4><?php the_field('slider_sub_heading'); ?> </h4>
+                                <?php endif; ?>
+                                <h1><?php the_title(); ?></h1>
+                                <p><?php the_content() ?></p>
+
+                                <?php if(get_field('slider_button_text')): ?>
+                                <a href="<?php the_field('slider_button_link'); ?>" class="box-btn"><?php the_field('slider_button_text'); ?></a>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="single-slide bg" style="background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/sliders/slide-2.jpg');">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xxl-12">
-                            <div class="slide-content">
-                                <h4>we are halim</h4>
-                                <h1>modern agency</h1>
-                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas facere nostrum vel. Dolor accusantium animi laudantium placeat omnis eius consequuntur.</p>
-                                <a href="" class="box-btn">contact us</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="single-slide bg" style="background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/sliders/slide-3.jpg');">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xxl-12">
-                            <div class="slide-content">
-                                <h4>we are halim</h4>
-                                <h1>creative agency</h1>
-                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas facere nostrum vel. Dolor accusantium animi laudantium placeat omnis eius consequuntur.</p>
-                                <a href="" class="box-btn">contact us</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php endwhile; ?>
+            <?php wp_reset_postdata(); ?>
         </div>
+
     </section>
     <!-- Slider Area End Here -->
 
@@ -229,48 +221,28 @@ get_header();
                 </div>
             </div>
             <div class="row">
+
+            <?php
+            $services = new WP_Query(array(
+                'post_type' => 'faith_services',
+            ));
+            
+            ?>
+            <?php while($services->have_posts()):$services->the_post();
+            
+            ?>
+            
                 <div class="col-xl-4 col-lg-6">
                     <div class="single-service">
-                        <i class="fas fa-laptop"></i>
-                        <h4>web design</h4>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas perferendis, deserunt quos ratione maxime doloribus asperiores hic obcaecati praesentium libero!</p>
+                        <i class="<?php the_field('service_icon'); ?>"></i>
+                        <h4><?php the_title(); ?></h4>
+                        <p><?php the_content(); ?></p>
                     </div>
                 </div>
-                <div class="col-xl-4 col-lg-6">
-                    <div class="single-service">
-                        <i class="fas fa-cogs"></i>
-                        <h4>web development</h4>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas perferendis, deserunt quos ratione maxime doloribus asperiores hic obcaecati praesentium libero!</p>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-lg-6">
-                    <div class="single-service">
-                        <i class="fas fa-mobile-alt"></i>
-                        <h4>responsive design</h4>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas perferendis, deserunt quos ratione maxime doloribus asperiores hic obcaecati praesentium libero!</p>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-lg-6">
-                    <div class="single-service">
-                        <i class="fas fa-magic"></i>
-                        <h4>graphics design</h4>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas perferendis, deserunt quos ratione maxime doloribus asperiores hic obcaecati praesentium libero!</p>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-lg-6">
-                    <div class="single-service">
-                        <i class="fas fa-pencil-alt"></i>
-                        <h4>creative design</h4>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas perferendis, deserunt quos ratione maxime doloribus asperiores hic obcaecati praesentium libero!</p>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-lg-6">
-                    <div class="single-service">
-                        <i class="fas fa-flag"></i>
-                        <h4>branding</h4>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas perferendis, deserunt quos ratione maxime doloribus asperiores hic obcaecati praesentium libero!</p>
-                    </div>
-                </div>
+                <?php endwhile;
+                   wp_reset_postdata(  ); 
+                ?>
+               
             </div>
         </div>
     </section>
