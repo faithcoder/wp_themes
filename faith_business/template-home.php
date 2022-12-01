@@ -252,30 +252,22 @@ get_header();
     <section class="counter-area">
         <div class="container-fluid g-0">
             <div class="row g-0">
+                <?php 
+                    $counter = new WP_Query(array(
+                        'post_type' => 'faith_counter',
+                        'posts_per_page' => 4,
+                    ));
+                ?>
+                <?php while($counter->have_posts()):$counter->the_post(); ?>
                 <div class="col-xxl-3 col-sm-6">
                     <div class="single-counter">
-                        <i class="fas fa-user"></i>
-                        <h4><span class="counter">567</span>customers</h4>
+                        <i class="<?php the_field('counter_icon'); ?>"></i>
+                        <h4><span class="counter"><?php the_field('counter_number'); ?> </span><?php the_title(); ?></h4>
                     </div>
                 </div>
-                <div class="col-xxl-3 col-sm-6">
-                    <div class="single-counter">
-                        <i class="fas fa-code"></i>
-                        <h4><span class="counter">50,000</span>line of codes</h4>
-                    </div>
-                </div>
-                <div class="col-xxl-3 col-sm-6">
-                    <div class="single-counter">
-                        <i class="far fa-file"></i>
-                        <h4><span class="counter">45</span>projects completed</h4>
-                    </div>
-                </div>
-                <div class="col-xxl-3 col-sm-6">
-                    <div class="single-counter">
-                        <i class="fas fa-coffee"></i>
-                        <h4><span class="counter">2,000</span>cup of coffees</h4>
-                    </div>
-                </div>
+                <?php endwhile; 
+                    wp_reset_postdata();
+                ?> 
             </div>
         </div>
     </section>
@@ -294,51 +286,29 @@ get_header();
                 </div>
             </div>
             <div class="row">
+
+            <?php 
+                $team = new WP_Query(array(
+                    'post_type' => 'faith_teams'
+                ));
+            ?>
+            <?php while($team->have_posts()):$team->the_post();?>
                 <div class="col-md-4">
                     <div class="single-team">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/1.jpg" alt="">
+                        <img src="<?php echo the_post_thumbnail_url(); ?>" alt="">
                         <div class="team-content">
-                            <h4>john doe <span>web developer</span></h4>
+                            <h4><?php the_title(); ?> <span><?php the_field('team_designation'); ?></span></h4>
                             <div class="team-con">
-                                <a href=""><i class="fab fa-facebook-f"></i></a>
-                                <a href=""><i class="fab fa-twitter"></i></a>
-                                <a href=""><i class="fab fa-instagram"></i></a>
-                                <a href=""><i class="fab fa-linkedin-in"></i></a>
-                                <a href=""><i class="fab fa-youtube"></i></a>
+                                <a href="<?php the_field('team_facebook_link'); ?>"><i class="fa fa-facebook-f"></i></a>
+                                <a href="<?php the_field('team_twitter_link'); ?>"><i class="fa fa-twitter"></i></a>
+                                <a href="<?php the_field('team_linkedin_link'); ?>"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="single-team">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/2.jpg" alt="">
-                        <div class="team-content">
-                            <h4>john doe <span>web developer</span></h4>
-                            <div class="team-con">
-                                <a href=""><i class="fab fa-facebook-f"></i></a>
-                                <a href=""><i class="fab fa-twitter"></i></a>
-                                <a href=""><i class="fab fa-instagram"></i></a>
-                                <a href=""><i class="fab fa-linkedin-in"></i></a>
-                                <a href=""><i class="fab fa-youtube"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="single-team">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/team/3.jpg" alt="">
-                        <div class="team-content">
-                            <h4>john doe <span>web developer</span></h4>
-                            <div class="team-con">
-                                <a href=""><i class="fab fa-facebook-f"></i></a>
-                                <a href=""><i class="fab fa-twitter"></i></a>
-                                <a href=""><i class="fab fa-instagram"></i></a>
-                                <a href=""><i class="fab fa-linkedin-in"></i></a>
-                                <a href=""><i class="fab fa-youtube"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <?php endwhile;
+                wp_reset_postdata(  );
+            ?>    
             </div>
         </div>
     </section>

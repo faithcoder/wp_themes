@@ -2,7 +2,7 @@
 
 function faith_setup(){
     add_theme_support( 'title-tag' );
-	add_theme_support('post-thumbnails', array('post','faith_slider'));
+	add_theme_support('post-thumbnails', array('post','faith_slider','faith_teams'));
     load_theme_textdomain('faith',get_template_directory().'/languages');
     register_nav_menus(array(
         'primary-menu' => __('Primary Menu', 'faith'),
@@ -91,6 +91,7 @@ function slider_post() {
 		'publicly_queryable'    => true,
 		'capability_type'       => 'page',
 		'show_in_rest'     		=> true,
+		'menu_icon'     		=> 'dashicons-images-alt',
 	);
 	register_post_type( 'faith_slider', $args );
 
@@ -149,8 +150,33 @@ function faith_services() {
 		'exclude_from_search'   => false,
 		'publicly_queryable'    => true,
 		'capability_type'       => 'page',
+		'menu_icon'       		=> 'dashicons-editor-expand',
 	);
 	register_post_type( 'faith_services', $args );
 
+	//Register custom post for Counter 
+	register_post_type( 'faith_counter', array(
+		'labels' 				=> array(
+			'name' 				=> __('Counter','faith_counter'),
+			'singular_name' 	=> __('Counter','faith_counter'),
+		),
+		'public' 				=> true,
+		'show_ui' 				=> true,
+		'supports'              => array( 'title', 'custom-fields',),
+	));
+	//Register custom post for Team Section 
+	register_post_type( 'faith_teams', array(
+		'labels' 				=> array(
+			'name' 				=> __('Team','faith_teams'),
+			'singular_name' 	=> __('Team','faith_teams'),
+		),
+		'public' 				=> true,
+		'show_ui' 				=> true,
+		'supports'              => array( 'title', 'custom-fields', 'thumbnail'),
+		'menu_icon'				=> 'dashicons-buddicons-buddypress-logo',
+	));
+
 }
 add_action( 'init', 'faith_services', 0 );
+
+
